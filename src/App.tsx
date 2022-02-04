@@ -51,7 +51,7 @@ function App() {
       ['', '', '', '', ''],
       ['', '', '', '', ''],
     ],
-    cellStatuses: Array(6).fill(Array(5).fill(status.unguessed)),
+    cellStatuses: Array(6).fill(Array(6).fill(status.unguessed)),
     currentRow: 0,
     currentCol: 0,
     letterStatuses: () => {
@@ -144,21 +144,21 @@ function App() {
   const addLetter = (letter: string) => {
     setSubmittedInvalidWord(false)
     setBoard((prev: string[][]) => {
-      if (currentCol > 4) {
+      if (currentCol > 5) {
         return prev
       }
       const newBoard = [...prev]
       newBoard[currentRow][currentCol] = letter
       return newBoard
     })
-    if (currentCol < 5) {
+    if (currentCol < 4) {
       setCurrentCol((prev: number) => prev + 1)
     }
   }
 
   // returns an array with a boolean of if the word is valid and an error message if it is not
   const isValidWord = (word: string): [boolean] | [boolean, string] => {
-    if (word.length < 5) return [false, `please enter a 5 letter word`]
+    if (word.length < 6) return [false, `please enter a 6 letter word`]
     if (difficultyLevel === difficulty.easy) return [true]
     debugger
     if (!words[word.toLowerCase()]) return [false, `${word} is not a valid word. Please try again.`]
